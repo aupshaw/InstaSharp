@@ -1,36 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Web;
 using System.Web.Script.Serialization;
+using InstaSharp.Config;
 
-namespace InstaSharp {
-    public class Auth {
-
+namespace InstaSharp.Auth
+{
+    public class Auth
+    {
         InstagramConfig _config;
-
         JavaScriptSerializer _serializer;
 
-        public enum Scope {
+        public enum Scope
+        {
             basic,
             comments,
             relationships,
             likes
         }
 
-        public Auth(InstagramConfig config) {
+        public Auth(InstagramConfig config)
+        {
             _config = config;
         }
 
-        public static string AuthLink(string instagramOAuthURI, string clientId, string callbackURI, List<Scope> scopes) {
+        public static string AuthLink(string instagramOAuthURI, string clientId, string callbackURI, List<Scope> scopes)
+        {
             StringBuilder scope = new StringBuilder();
             scopes.ForEach(s => {
                 if (scope.Length > 0) scope.Append("+");
                 scope.Append(s);
             });
 
-            return string.Format("{0}/authorize/?client_id={1}&redirect_uri={2}&response_type=code&scope={3}", new object[] {
+            return string.Format("{0}/authorize/?client_id={1}&redirect_uri={2}&response_type=code&scope={3}", new object[]
+            {
                 instagramOAuthURI,
                 clientId, 
                 callbackURI, 
@@ -38,8 +40,8 @@ namespace InstaSharp {
             });
         }
 
-        public AuthInfo RequestToken(string code) {
-            
+        public AuthInfo RequestToken(string code)
+        {
             _serializer = new JavaScriptSerializer();
            
             var parameters = new Dictionary<string, string>();

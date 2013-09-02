@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace InstaSharp.Model {
-    public class Pagination {
-
+﻿namespace InstaSharp.Model
+{
+    public class Pagination
+    {
         [JsonMapping("next_url", JsonMapping.MappingType.Primitive)]
         public string NextUrl { get; set; }
         
